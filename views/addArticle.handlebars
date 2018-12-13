@@ -1,0 +1,30 @@
+<h2 class="post-title col-md-12">Edit your Post!</h2>
+<div class="form-group">
+
+    <div class="form-group col-md-12">
+
+        <form name="article" enctype="multipart/form-data" action="/editArticle" method="POST">
+            <div class="form-group">
+                <textarea class="form-control" name="articleSubmission" id="articleSubmission" rows="15">{{#if edit}}{{{content}}}{{/if}}
+        </textarea>
+                <script>
+                    tinymce.init({
+                        selector: 'textarea',
+                        plugins: 'image code textcolor insertdatetime media table contextmenu paste code help',
+                        toolbar: 'insertfile link image | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | | link image media | help',
+
+                        image_title: true,
+
+                        relative_urls: true,
+                        remove_script_host: false,
+                        images_upload_base_path: "",
+                        automatic_uploads: true
+                    });
+                </script>
+            </div>
+            </br>
+            <button type="submit" class="btn btn-primary">Submit</button> {{#if edit}}
+            <input type="text" style="display: none;" class="col-sm-2" id="articleID" name="articleID" value="{{article_ID}}" read only>            {{/if}}
+        </form>
+    </div>
+</div>

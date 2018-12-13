@@ -1,0 +1,8 @@
+ {{#if username}} {{#each articles}}
+<form class="form-inline" action="/edit/{{article_ID}}" method="POST">
+
+    <div class="col-sm-12">
+        <button type="submit" formaction="/edit/{{article_ID}}" formmethod="GET" class="btn btn-outline-info float-right">Edit</button></a>
+    </div>
+
+</form> {{{content}}} {{/each}} {{else}} {{#each articles}} {{{content}}} {{/each}} {{/if}}

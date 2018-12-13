@@ -1,0 +1,132 @@
+<!-- Time -->
+<section class="content-section bg-primary text-white text-center" id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <span class="mx-auto mb-3">
+          <img src="img/icons/calendar_icon_white.png" alt="Date">
+        </span>
+        <h4>
+          <strong><br>SAT 26 – MON 28
+            <br> January
+          </strong>
+        </h4>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <span class="mx-auto mb-3">
+          <img src="img/icons/location_icon.png" alt="Date">
+        </span>
+        <h4>
+          <strong><br>The Cloud<br>Queens Wharf,<br>Auckland</strong>
+        </h4>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <span class="mx-auto mb-3">
+          <img src="img/icons/time_icon.png" alt="Date">
+        </span>
+        <h4>
+          <strong><br>Sat: 10am – 6pm<br>Sun: 10am – 10pm<br>Mon: 10am – 6pm</strong>
+        </h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Portfolio -->
+<section class="content-section" id="portfolio">
+  <div class="container">
+    <div class="content-section-heading text-center">
+      <h1 class="text-secondary mb-0">Featuring</h1>
+      <br>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-lg-6">
+        <a class="portfolio-item" href="/music">
+          <span class="caption">
+            <span class="caption-content">
+              <h1>Music</h1>
+              <p class="mb-0 font-weight-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Respondeat totidem
+                verbis. Sed tu istuc dixti bene Latine, parum plane.</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="img/Featuring/music.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <a class="portfolio-item" href="/food">
+          <span class="caption">
+            <span class="caption-content">
+              <h1>Food</h1>
+              <p class="mb-0 font-weight-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pollicetur certe.
+                Nos cum te, M. Primum divisit ineleganter; Proclivi currit oratio.</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="img/Featuring/food.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <a class="portfolio-item" href="/entertainment">
+          <span class="caption">
+            <span class="caption-content">
+              <h1>Entertainment</h1>
+              <p class="mb-0 font-weight-bold">Idemque diviserunt naturam hominis in animum et corpus. Explanetur igitur.
+                Inquit, dasne adolescenti veniam!</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="img/Featuring/entertainment.jpg" alt="">
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <a class="portfolio-item" href="/parties">
+          <span class="caption">
+            <span class="caption-content">
+              <h1>Parties</h1>
+              <p class="mb-0 font-weight-bold">Falli igitur possumus. Qui ita affectus, beatum esse numquam probabis; Suam
+                denique cuique naturam esse ad vivendum ducem.</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="img/Featuring/parties.jpg" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="row no-gutters justify-content-center">
+      <div class="col-lg-6">
+        <a class="portfolio-item" href="/freeclasses">
+          <span class="caption">
+            <span class="caption-content">
+              <h1>Free classes</h1>
+              <p class="mb-0 font-weight-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urgent tamen et nihil
+                remittunt. Primum quid tu dicis breve? Graccho, eius fere, aequalí?</p>
+            </span>
+          </span>
+          <img class="img-fluid" src="img/Featuring/dance_classes.jpg" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Schedule -->
+<section class="content-section bg-primary text-white" id="about">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="content-section-heading text-center">
+          <h1 class="text-secondary mb-0">Schedule</h1>
+          <br>
+        </div>
+        {{#if username}} {{#each articles}}
+        <form class="form-inline" action="/edit/{{article_ID}}" method="POST">
+
+          <div class="col-sm-12">
+            <button type="submit" formaction="/edit/{{article_ID}}" formmethod="GET" class="btn btn-outline-info float-right">Edit</button></a>
+          </div>
+
+        </form> {{{content}}} {{/each}} {{else}} {{#each articles}} {{{content}}} {{/each}} {{/if}}
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Auckland Latin Fiesta</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css">
+  <link href="../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="../css/stylish-portfolio.min.css" rel="stylesheet">
+
+  <!-- Tinymce Editor -->
+
+  <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="/#page-top">Latin Fiesta</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="/#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="/#about">Schedule</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="/#portfolio">Featuring</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+      {{#if username}}
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="/logout">Log Out</a>
+      </li>
+      {{else}}
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="/login">Log In</a>
+      </li>
+      {{/if}}
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex" style="background-image: url('../img/{{bgPicture}}.jpg'); {{height}}">
+    {{#if home}}
+    <div class="container text-center my-auto">
+      <h1 class="mb-1 text-white">Auckland<br>Latin Fiesta<br>2019</h1>
+      <h3 class="mb-5 text-secondary">
+        <em>3 days and 2 nights<br>over Anniversary Weekend<br>Jan 26-28</em>
+      </h3>
+      <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+    </div>
+    <div class="overlay"></div>
+    {{/if}}
+  </header>
+
+
+
+  {{{body}}}
+
+
+
+  <!-- Map -->
+  <section id="contact" class="map">
+    <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJb5-51vhHDW0RxXMXGq7jEMk&key=AIzaSyDrIQ9rfe-VZccbzBzJHucNHfcdmnl-VRM"></iframe>
+    <br/>
+    <small>
+      <a href="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJb5-51vhHDW0RxXMXGq7jEMk&key=AIzaSyDrIQ9rfe-VZccbzBzJHucNHfcdmnl-VRM"></a>
+    </small>
+  </section>
+
+
+  <!-- Services -->
+  <!-- Contact -->
+  <section class="content-section bg-primary text-white text-center" id="services">
+    <div class="container">
+      <div class="content-section-heading">
+        <h1 class="text-secondary mb-0">Contact</h1>
+        <h4 class="mb-5">If you have any questions feel free to contact us.</h4>
+        <!-- <br> -->
+      </div>
+
+
+      <div class="row justify-content-center">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <a href="mailto:info@latinfiesta.co.nz"><i class="fa fa-at"></i></a>
+          </span>
+          <h4>
+            <strong><a class="text-white" href="mailto:info@latinfiesta.co.nz">info@latinfiesta.co.nz</a></strong>
+          </h4>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <a href="tel: +6493767900"><i class="fas fa-phone"></i></a>
+          </span>
+          <h4>
+            <strong><a class="text-white" href="tel: +6493767900">09 376 7900</a></strong>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.com/latinfiestaNZ/">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="">
+            <i class="icon-social-instagram"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="">
+            <i class="icon-social-youtube"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; Auckland Latin Fiesta 2019</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../js/stylish-portfolio.min.js"></script>
+
+</body>
+
+</html>
