@@ -127,7 +127,7 @@ app.get('/' || '/index', function (req, res) {
         var articles = rows;
         var data = {
             articles: articles,
-            bgPicture: "cloud_side",
+            bgPicture: "latinfiesta",
             username: username,
             home: true
         };
@@ -210,6 +210,22 @@ app.get('/parties', function (req, res) {
         var data = {
             articles: articles,
             bgPicture: "Featuring/parties",
+            height: "height: 25%",
+            username: username
+        }
+        res.render('features', data);
+    });
+});
+
+app.get('/markets', function (req, res) {
+    if (req.isAuthenticated()) {
+        var username = req.user.username;
+    }
+    db.all("SELECT article_ID, content FROM article WHERE article_ID = 7", function (err, rows) {
+        var articles = rows;
+        var data = {
+            articles: articles,
+            bgPicture: "Featuring/market",
             height: "height: 25%",
             username: username
         }
