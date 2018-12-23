@@ -35,6 +35,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "formidable": "^1.2.1",
+    "fs": "0.0.1-security",
     "handlebars": "^4.0.12",
     "jquery": "3.3.1",
     "jquery.easing": "^1.4.1",
