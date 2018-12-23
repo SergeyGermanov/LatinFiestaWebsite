@@ -239,7 +239,7 @@ app.get('/markets', function (req, res) {
 app.get('/addArticle', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
-        res.render('addArticle', { username: username, height: "height: 25%", bgPicture: "cloud_entrance" });
+        res.render('addArticle', { username: username, height: "height: 25%", bgPicture: "latinfiesta" });
     } else {
         res.redirect('/login');
     }
@@ -272,7 +272,7 @@ app.get('/edit/:article_ID', function (req, res) {
             var loadArticle = rows[0];
             var data = {
                 username: username,
-                bgPicture: "cloud_entrance",
+                bgPicture: "latinfiesta",
                 height: "height: 25%",
                 content: loadArticle.content,
                 article_ID: articleID,
