@@ -8,6 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Files init
 var formidable = require('formidable');
 
+//Using bodyparser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+
 // SQLite init
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('base.db');
