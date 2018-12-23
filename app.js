@@ -5,10 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Handlebars
-var handlebars = require('express-handlebars');
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+// Files init
+var formidable = require('formidable');
 
 // SQLite init
 var sqlite3 = require('sqlite3').verbose();
@@ -26,21 +24,12 @@ app.use(session({
     secret: "compsci719"
 }));
 
-// Files and dir init
-var formidable = require('formidable');
-
 // Passport init
 var passport = require('passport');
 var localStratagy = require('passport-local').Strategy;
 
 // Hash bcrypt
 var bcrypt = require('bcrypt');
-
-// Initialize port
-app.set('port', process.env.PORT || 8080);
-
-// Initialize folder
-app.use(express.static(path.join(__dirname, 'public')));
 
 //Authorisation
 getUser = function (username, callback) {
@@ -53,6 +42,8 @@ getUser = function (username, callback) {
         }
     });
 };
+
+
 
 var localStratagy = new localStratagy(
     function (username, password, done) {
@@ -84,6 +75,20 @@ passport.use('local', localStratagy);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Handlebars
+var handlebars = require('express-handlebars');
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+
+
+// Initialize port
+app.set('port', process.env.PORT || 8080);
+
+// Initialize folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 //home and login
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
@@ -107,7 +112,11 @@ app.post('/login', passport.authenticate('local',
     }
 ));
 
-
+//logout
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
+});
 
 // Start the site
 app.get('/' || '/index', function (req, res) {
@@ -237,16 +246,11 @@ app.post('/addArticle', function (req, res) {
     var username = req.user.username;
     var form = new formidable.IncomingForm();
 
-    form.on("fileBegin", function (name, file) {
-        if (file.name) {
-            file.path = __dirname + "/public/img/" + file.name;
-        }
-    });
-    
+
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
         db.run("INSERT INTO article (content, username) VALUES (?, ?)", [content, username], function (err) {
-            res.redirect('/');
+            res.redirect('/blog');
         });
     });
 });
@@ -277,12 +281,6 @@ app.post('/editArticle', function (req, res) {
     var username = req.user.username;
     var form = new formidable.IncomingForm();
 
-    form.on("fileBegin", function (name, file) {
-        if (file.name) {
-            file.path = __dirname + "/public/img/" + file.name;
-        }
-    });
-
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
         var articleID = fields.articleID;
@@ -291,33 +289,6 @@ app.post('/editArticle', function (req, res) {
         });
     });
 
-});
-
-// Save images directly from TinyMCE
-app.post('/saveImages', function (req, res) {
-    var username = req.user.username;
-
-    var form = new formidable.IncomingForm();
-
-    form.on("fileBegin", function (name, file) {
-
-        file.path = __dirname + "/public/img/Tiny/" + file.name;
-    });
-    form.parse(req, function (err, fields, files) {
-
-        var image = files.file.name;
-        var fileName = image.toLowerCase();
-
-        var file = "/img/Tiny/" + fileName;
-        var filelocation = { location: file };
-        res.end(JSON.stringify(filelocation));
-    });
-});
-
-//logout
-app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
 });
 
 // Run teh whole thing from port 8080
