@@ -24,6 +24,9 @@ app.use(session({
     secret: "compsci719"
 }));
 
+// Files and dir init
+var formidable = require('formidable');
+
 // Passport init
 var passport = require('passport');
 var localStratagy = require('passport-local').Strategy;
@@ -246,11 +249,16 @@ app.post('/addArticle', function (req, res) {
     var username = req.user.username;
     var form = new formidable.IncomingForm();
 
-
+    form.on("fileBegin", function (name, file) {
+        if (file.name) {
+            file.path = __dirname + "/public/img/" + file.name;
+        }
+    });
+    
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
         db.run("INSERT INTO article (content, username) VALUES (?, ?)", [content, username], function (err) {
-            res.redirect('/blog');
+            res.redirect('/');
         });
     });
 });
@@ -281,6 +289,12 @@ app.post('/editArticle', function (req, res) {
     var username = req.user.username;
     var form = new formidable.IncomingForm();
 
+    form.on("fileBegin", function (name, file) {
+        if (file.name) {
+            file.path = __dirname + "/public/img/" + file.name;
+        }
+    });
+
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
         var articleID = fields.articleID;
@@ -289,6 +303,27 @@ app.post('/editArticle', function (req, res) {
         });
     });
 
+});
+
+// Save images directly from TinyMCE
+app.post('/saveImages', function (req, res) {
+    var username = req.user.username;
+
+    var form = new formidable.IncomingForm();
+
+    form.on("fileBegin", function (name, file) {
+
+        file.path = __dirname + "/public/img/Tiny/" + file.name;
+    });
+    form.parse(req, function (err, fields, files) {
+
+        var image = files.file.name;
+        var fileName = image.toLowerCase();
+
+        var file = "/img/Tiny/" + fileName;
+        var filelocation = { location: file };
+        res.end(JSON.stringify(filelocation));
+    });
 });
 
 // Run teh whole thing from port 8080
