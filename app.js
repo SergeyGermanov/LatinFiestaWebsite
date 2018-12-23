@@ -5,12 +5,10 @@ var path = require('path');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Files init
-var formidable = require('formidable');
-
-//Using bodyparser
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+// Handlebars
+var handlebars = require('express-handlebars');
+app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
 // SQLite init
 var sqlite3 = require('sqlite3').verbose();
@@ -38,6 +36,12 @@ var localStratagy = require('passport-local').Strategy;
 // Hash bcrypt
 var bcrypt = require('bcrypt');
 
+// Initialize port
+app.set('port', process.env.PORT || 8080);
+
+// Initialize folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Authorisation
 getUser = function (username, callback) {
     username = username.toLowerCase();
@@ -49,8 +53,6 @@ getUser = function (username, callback) {
         }
     });
 };
-
-
 
 var localStratagy = new localStratagy(
     function (username, password, done) {
@@ -82,20 +84,6 @@ passport.use('local', localStratagy);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Handlebars
-var handlebars = require('express-handlebars');
-app.engine('handlebars', handlebars({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-
-
-
-// Initialize port
-app.set('port', process.env.PORT || 8080);
-
-// Initialize folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 //home and login
 app.get('/login', function (req, res) {
     if (req.isAuthenticated()) {
@@ -119,11 +107,7 @@ app.post('/login', passport.authenticate('local',
     }
 ));
 
-//logout
-app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-});
+
 
 // Start the site
 app.get('/' || '/index', function (req, res) {
@@ -328,6 +312,12 @@ app.post('/saveImages', function (req, res) {
         var filelocation = { location: file };
         res.end(JSON.stringify(filelocation));
     });
+});
+
+//logout
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/');
 });
 
 // Run teh whole thing from port 8080

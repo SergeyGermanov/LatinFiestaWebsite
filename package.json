@@ -1,35 +1,16 @@
 {
-  "title": "Stylish Portfolio",
   "name": "viva",
   "version": "5.0.1",
-  "description": "A stylish portfolio HTML template built with Bootstrap",
-  "keywords": [
-    "css",
-    "sass",
-    "html",
-    "responsive",
-    "theme",
-    "template"
-  ],
-  "homepage": "https://startbootstrap.com/template-overviews/stylish-portfolio",
-  "bugs": {
-    "url": "https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio/issues",
-    "email": "feedback@startbootstrap.com"
+  "description": "The Auckland Latin Fiesta 2019",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT",
   "author": "Start Bootstrap",
-  "contributors": [
-    "David Miller (http://davidmiller.io/)"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BlackrockDigital/startbootstrap-stylish-portfolio.git"
-  },
+  "license": "MTI",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "5.3.1",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
-    "bootstrap": "4.1.3",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
@@ -37,26 +18,9 @@
     "formidable": "^1.2.1",
     "fs": "0.0.1-security",
     "handlebars": "^4.0.12",
-    "jquery": "3.3.1",
-    "jquery.easing": "^1.4.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
-    "simple-line-icons": "^2.4.1",
     "sqlite3": "^4.0.4"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.26.3",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "6.0.0",
-    "gulp-clean-css": "3.10.0",
-    "gulp-header": "2.0.5",
-    "gulp-rename": "1.4.0",
-    "gulp-sass": "4.0.1",
-    "gulp-uglify": "3.0.1"
-  },
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
