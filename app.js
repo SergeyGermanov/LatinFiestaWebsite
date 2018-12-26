@@ -31,6 +31,40 @@ var localStratagy = require('passport-local').Strategy;
 // Hash bcrypt
 var bcrypt = require('bcrypt');
 
+// PostgreSQL init
+var pg = require('pg');
+var Pool = require('pg-pool');
+var config = {
+    user: 'kxluyftrafeiuf',
+    password: '572a8fb732c3c86cb4d1fd66368a4d2f1d70034a72f6902d7c5863a30882bc57',
+    host: 'ec2-107-20-237-78.compute-1.amazonaws.com',
+    port: '5432',
+    database: 'dco5q369beqoq6',
+    ssl: true
+};
+var pool = new Pool(config);
+
+// PostgreSQL functions
+function query(sql, params, callback) {
+    pool.connect(function (err, client, done) {
+
+        if (err) {
+            return console.error('error fetching client from pool', err);
+        }
+        client.query(sql, params, function (err, result) {
+            done();
+            if (err) {
+                return console.error('error running query', err);
+            }
+            if (callback) {
+                callback(err, result);
+            }
+        });
+
+    });
+};
+
+
 //Authorisation
 getUser = function (username, callback) {
     username = username.toLowerCase();
@@ -123,8 +157,8 @@ app.get('/' || '/index', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 1", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\"='1'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "latinfiesta",
@@ -140,8 +174,8 @@ app.get('/entertainment', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 3", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '3'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "Featuring/entertainment",
@@ -156,8 +190,9 @@ app.get('/food', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 2", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '2'", [], function (err, rows) {
+        var articles = rows.rows;
+       
         var data = {
             articles: articles,
             bgPicture: "Featuring/food",
@@ -173,8 +208,8 @@ app.get('/freeclasses', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 4", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '4'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "Featuring/dance_classes",
@@ -189,8 +224,8 @@ app.get('/music', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 5", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '5'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "Featuring/music",
@@ -205,8 +240,8 @@ app.get('/parties', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 6", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '6'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "Featuring/parties",
@@ -221,8 +256,8 @@ app.get('/markets', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
     }
-    db.all("SELECT article_ID, content FROM article WHERE article_ID = 7", function (err, rows) {
-        var articles = rows;
+    query("SELECT \"article_ID\", \"content\" FROM \"article\" WHERE \"article_ID\" = '7'", [], function (err, rows) {
+        var articles = rows.rows;
         var data = {
             articles: articles,
             bgPicture: "Featuring/market",
@@ -249,8 +284,8 @@ app.post('/addArticle', function (req, res) {
 
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
-        db.run("INSERT INTO article (content, username) VALUES (?, ?)", [content, username], function (err) {
-            res.redirect('/blog');
+        query("INSERT INTO \"article\" (\"content\", \"username\") VALUES ($1, $2)", [content, username], function (err) {
+            res.redirect('/');
         });
     });
 });
@@ -260,8 +295,8 @@ app.get('/edit/:article_ID', function (req, res) {
     if (req.isAuthenticated()) {
         var username = req.user.username;
         var articleID = req.params.article_ID;
-        db.all("SELECT content FROM article WHERE article_ID = ?", [articleID], function (err, rows) {
-            var loadArticle = rows[0];
+        query("SELECT \"content\" FROM \"article\" WHERE \"article_ID\" = $1", [articleID], function (err, rows) {
+            var loadArticle = rows.rows[0];
             var data = {
                 username: username,
                 bgPicture: "latinfiesta",
@@ -284,7 +319,8 @@ app.post('/editArticle', function (req, res) {
     form.parse(req, function (err, fields) {
         var content = fields.articleSubmission;
         var articleID = fields.articleID;
-        db.run("UPDATE article SET content = ?, username = ? WHERE article_ID = ?", [content, username, articleID], function (err) {
+        
+        query("UPDATE \"article\" SET \"content\"='"+ content +"' WHERE \"article_ID\"='"+ articleID +"'", [], function (err) {
             res.redirect('/');
         });
     });
