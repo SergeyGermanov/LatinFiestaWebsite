@@ -27,10 +27,7 @@ Back-End:
 +nodemailer-smtp-transport
 +SQLlite
 +PostgreSQL
-+bcrypt
++bcryptjs
 +pasport
 +sessions
 +cookies
-- GIT was used for version control.
-
-This is a website for The Auckland Latin Fiesta 2019 event.
