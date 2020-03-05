@@ -1,6 +1,6 @@
 # LatinFiestaWebsite
 
-www.latinfiesta.co.nz
+http://latinfiesta.herokuapp.com/
 
 Features:
 - Responsive design
