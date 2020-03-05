@@ -1,4 +1,4 @@
-#LatinFiestaWebsite
+# LatinFiestaWebsite
 
 www.latinfiesta.co.nz
 
@@ -18,16 +18,25 @@ Front-End
 
 Back-End:
 - Node.js
-+Handlerbars
++express-handlebars
 +express
++express-session
 +exports
++formidable
++handlebars
 +path
 +body-parser
 +nodemailer
 +nodemailer-smtp-transport
-+SQLlite
++sqlite3
 +PostgreSQL
 +bcryptjs
-+pasport
++passport
++passport-local
 +sessions
 +cookies
++cookie-parser
++pg
++pg-pool
++fortawesome/fontawesome-free
++simple-line-icons
